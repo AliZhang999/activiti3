@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/activiti?characterEncoding=utf8&useSSL=true
+    username: root
+    password: 1q2w3e4r
+  http:
+    encoding:
+      enabled: true
+      force: true
+      charset: UTF-8
+  activiti:
+    check-process-definitions: false
+server:
+  tomcat:
+    uri-encoding: utf-8
