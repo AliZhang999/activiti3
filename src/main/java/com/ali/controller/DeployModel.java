@@ -1,13 +1,7 @@
 package com.ali.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.activiti.bpmn.converter.BpmnXMLConverter;
-import org.activiti.bpmn.model.BpmnModel;
-import org.activiti.editor.language.json.converter.BpmnJsonConverter;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.repository.Deployment;
-import org.activiti.engine.repository.Model;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +15,7 @@ public class DeployModel {
 
     @GetMapping("deploymodel")
     public void deployByModel() throws Exception {
+        /*
         Model model = repositoryService.createModelQuery().modelName("vacation").singleResult();
 
         ObjectNode modelNode = (ObjectNode) new ObjectMapper().readTree(repositoryService.getModelEditorSource(model.getId()));
@@ -32,7 +27,8 @@ public class DeployModel {
         String resourceName = model.getName() + ".bpmn20.xml";
 
         Deployment deploy = repositoryService.createDeployment().name(model.getName()).addString(resourceName,new String(bytes,"UTF-8")).deploy();
-
+        */
+        Deployment deploy = repositoryService.createDeployment().addClasspathResource("processes/MutilInstanceUserTaskTestDemo.bpmn20.xml").deploy();
         String id = deploy.getId();
         String name = deploy.getName();
         String key = deploy.getKey();
@@ -40,7 +36,7 @@ public class DeployModel {
         System.out.println("deploy model id:"+id+",name:"+name+",key:"+key);
 
         //部署完成后，就生成一个流程定义
-        ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionKey("vacation").singleResult();
+        ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionKey("leavetest").singleResult();
         String processDefinitionId = processDefinition.getId();
         String processDefinitionKey = processDefinition.getKey();
         String processDefinitionName = processDefinition.getName();

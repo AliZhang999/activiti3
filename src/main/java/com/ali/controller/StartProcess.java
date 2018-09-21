@@ -14,7 +14,16 @@ public class StartProcess {
 
     @GetMapping("startprocess")
     public void startProcess(){
-        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("vacation");
+
+        /*List<String> assigneeList=new ArrayList<>(); //分配任务的人员
+        assigneeList.add("tom");
+        assigneeList.add("jeck");
+        assigneeList.add("mary");
+        Map<String, Object> vars = new HashMap<>(); //参数
+        vars.put("assigneeList", assigneeList);*/
+
+
+        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("leavetest");
         String processInstanceId = processInstance.getId();
         String processInstanceName = processInstance.getName();
         //processInstance id:5001,name:null

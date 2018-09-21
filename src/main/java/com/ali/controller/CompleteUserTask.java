@@ -13,8 +13,9 @@ public class CompleteUserTask {
     private TaskService taskService;
 
     @GetMapping("completeusertask")
-    public void completeUserTask(String processInstanceId){
-        Task task = taskService.createTaskQuery().processInstanceId(processInstanceId).singleResult();
+    public void completeUserTask(String processInstanceId,String username){
+        //Task task = taskService.createTaskQuery().processInstanceId(processInstanceId).singleResult();
+        Task task = taskService.createTaskQuery().processInstanceId(processInstanceId).taskAssignee(username).singleResult();
         String taskId = task.getId();
         String taskName = task.getName();
         String taskAssignee = task.getAssignee();
